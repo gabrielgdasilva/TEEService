@@ -102,6 +102,8 @@
     <Compile Include="DataContracts\Conta.cs" />
     <Compile Include="DataContracts\Distribuidora.cs" />
     <Compile Include="DataContracts\Fabrica.cs" />
+    <Compile Include="DataContracts\Grafico.cs" />
+    <Compile Include="DataContracts\Simulacao.cs" />
     <Compile Include="DataContracts\Tarifa.cs" />
     <Compile Include="DataContracts\TipoContrato.cs" />
     <Compile Include="DataContracts\TipoSubGrupo.cs" />

@@ -901,5 +901,83 @@ namespace TEEService
                 return false;
             }
         }
+
+        //----------------------------Simulacao------------------------------------------------------------
+
+        public bool GerarSimulacao(int fabricaID)
+        {
+            
+            if (DAO.Simulacao.GerarSimulacao(fabricaID))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //----------------------------Grafico--------------------------------------------------------------
+
+        public List<Grafico> DadosParaGrafico(int FabricaID)
+        {
+            List<DAO.Models.GraficoModel> ListGraficoDAO = DAO.Grafico.DadosParaGrafico(FabricaID);
+            List<Grafico> listaGrafico = new List<Grafico>();
+            foreach (var item in ListGraficoDAO)
+            {
+                Grafico grafico = new Grafico();
+
+                grafico.DataDaSimulacao = item.DataDaSimulacao;
+                grafico.DataReferencia = item.DataReferencia;
+                grafico.TarifaOrigemID = item.TarifaOrigemID;
+                grafico.TarifaDestinoID = item.TarifaDestinoID;
+                grafico.FabricaID = item.FabricaID;
+                grafico.DistribuidoraID = item.DistribuidoraID;
+                grafico.TipoContratoID = item.TipoContratoID;
+                grafico.TipoSubGrupoID = item.TipoSubGrupoID;
+                grafico.BandeiraID = item.BandeiraID;
+                grafico.ConsumoNaPontaTUSD_Registrado = item.ConsumoNaPontaTUSD_Registrado;
+                grafico.ConsumoForaPontaTUSD_Registrado = item.ConsumoForaPontaTUSD_Registrado;
+                grafico.ConsumoNaPontaTE_Registrado = item.ConsumoNaPontaTE_Registrado;
+                grafico.ConsumoForaPontaTE_Registrado = item.ConsumoForaPontaTE_Registrado;
+                grafico.ConsumoUltrapassagemNaPonta_Registrado = item.ConsumoUltrapassagemNaPonta_Registrado;
+                grafico.ConsumoUltrapassagemForaPonta_Registrado = item.ConsumoUltrapassagemForaPonta_Registrado;
+                grafico.DemandaTUSD_Registrado = item.DemandaTUSD_Registrado;
+                grafico.ConsumoNaPontaTUSD_Contratado = item.ConsumoNaPontaTUSD_Contratado;
+                grafico.ConsumoForaPontaTUSD_Contratado = item.ConsumoForaPontaTUSD_Contratado;
+                grafico.ConsumoNaPontaTE_Contratado = item.ConsumoNaPontaTE_Contratado;
+                grafico.ConsumoForaPontaTE_Contratado = item.ConsumoForaPontaTE_Contratado;
+                grafico.DemandaTUSD_Contratado = item.DemandaTUSD_Contratado;
+                grafico.ConsumoNaPontaTUSD_Faturado = item.ConsumoNaPontaTUSD_Faturado;
+                grafico.ConsumoForaPontaTUSD_Faturado = item.ConsumoForaPontaTUSD_Faturado;
+                grafico.ConsumoNaPontaTE_Faturado = item.ConsumoNaPontaTE_Faturado;
+                grafico.ConsumoForaPontaTE_Faturado = item.ConsumoForaPontaTE_Faturado;
+                grafico.ConsumoUltrapassagemNaPonta_Faturado = item.ConsumoUltrapassagemNaPonta_Faturado;
+                grafico.ConsumoUltrapassagemForaPonta_Faturado = item.ConsumoUltrapassagemForaPonta_Faturado;
+                grafico.DemandaTUSD_Faturado = item.DemandaTUSD_Faturado;
+                grafico.ConsumoNaPontaTUSD_TarifaPreco = item.ConsumoNaPontaTUSD_TarifaPreco;
+                grafico.ConsumoForaPontaTUSD_TarifaPreco = item.ConsumoForaPontaTUSD_TarifaPreco;
+                grafico.ConsumoNaPontaTE_TarifaPreco = item.ConsumoNaPontaTE_TarifaPreco;
+                grafico.ConsumoForaPontaTE_TarifaPreco = item.ConsumoForaPontaTE_TarifaPreco;
+                grafico.ConsumoUltrapassagemNaPonta_TarifaPreco = item.ConsumoUltrapassagemNaPonta_TarifaPreco;
+                grafico.ConsumoUltrapassagemForaPonta_TarifaPreco = item.ConsumoUltrapassagemForaPonta_TarifaPreco;
+                grafico.DemandaTUSD_TarifaPreco = item.DemandaTUSD_TarifaPreco;
+                grafico.ConsumoNaPontaTUSD_Valor = item.ConsumoNaPontaTUSD_Valor;
+                grafico.ConsumoForaPontaTUSD_Valor = item.ConsumoForaPontaTUSD_Valor;
+                grafico.ConsumoNaPontaTE_Valor = item.ConsumoNaPontaTE_Valor;
+                grafico.ConsumoForaPontaTE_Valor = item.ConsumoForaPontaTE_Valor;
+                grafico.ConsumoUltrapassagemNaPonta_Valor = item.ConsumoUltrapassagemNaPonta_Valor;
+                grafico.ConsumoUltrapassagemForaPonta_Valor = item.ConsumoUltrapassagemForaPonta_Valor;
+                grafico.DemandaTUSD_Valor = item.DemandaTUSD_Valor;
+                grafico.SubTotal = item.SubTotal;
+                grafico.ValorTotal = item.ValorTotal;
+                grafico.TipoContratoDestinoID = item.TipoContratoDestinoID;
+
+                listaGrafico.Add(grafico);
+            }
+            return listaGrafico;
+        }
+
+
     }
 }

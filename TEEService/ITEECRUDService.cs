@@ -128,6 +128,13 @@ namespace TEEService
         bool DeletarConta(Conta _Conta);
 
         //----------------------------Simulacao----------------------------------------------------------------
+        [OperationContract]
+        bool GerarSimulacao(int fabricaID);
+
+        //----------------------------Grafico------------------------------------------------------------------
+        [OperationContract]
+        List<Grafico> DadosParaGrafico(int FabricaID);
+
 
     }
 

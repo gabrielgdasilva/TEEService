@@ -46,6 +46,7 @@
     <Compile Include="Conta.cs" />
     <Compile Include="Distribuidora.cs" />
     <Compile Include="Fabrica.cs" />
+    <Compile Include="Grafico.cs" />
     <Compile Include="Models\BandeiraModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\ContaModel.cs" />

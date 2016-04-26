@@ -13,6 +13,6 @@ namespace DAO.Models
         public string Cnpj { get; set; }
         public string RazaoSocial { get; set; }
         public string Endereco { get; set; }
-        public List<FabricaModel> Fabricas { get; set; }
+        
     }
 }

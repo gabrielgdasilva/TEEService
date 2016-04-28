@@ -94,7 +94,7 @@ namespace DAO
             }
         }
 
-        public static List<FabricaModel> TodasFabricas()
+        public static List<FabricaModel> TodasFabricas(int ClienteID)
         {
             List<FabricaModel> listaSaida = new List<FabricaModel>();
             using (SqlConnection cnn = Conexoes.ConexaoSQL())
@@ -110,7 +110,10 @@ namespace DAO
                                  "f.endereco," +
                                  "f.id_distribuidora," +
                                  "FROM" +
-                                 "fabricas f";
+                                 "fabricas f"+
+                                 "WHERE"+
+                                 "f.id_cliente = @id_cliente";
+                cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = ClienteID;
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {

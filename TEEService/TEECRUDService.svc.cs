@@ -171,9 +171,9 @@ namespace TEEService
         }
 
         [OperationBehavior]
-        public List<Fabrica> TodasFabricas()
+        public List<Fabrica> TodasFabricas(int ClienteID)
         {
-            List<DAO.Models.FabricaModel> ListFabricaDAO = DAO.Fabrica.TodasFabricas();
+            List<DAO.Models.FabricaModel> ListFabricaDAO = DAO.Fabrica.TodasFabricas(ClienteID);
             List<Fabrica> listaFabricas = new List<Fabrica>();
             foreach (var item in ListFabricaDAO)
             {

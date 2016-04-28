@@ -41,7 +41,7 @@ namespace TEEService
         Fabrica DestalhesDaFabrica(int id);
 
         [OperationContract]
-        List<Fabrica> TodasFabricas();
+        List<Fabrica> TodasFabricas(int ClienteID);
 
         [OperationContract]
         bool DeletarFabrica(Fabrica _fabrica);

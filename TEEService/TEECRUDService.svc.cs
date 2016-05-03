@@ -508,6 +508,36 @@ namespace TEEService
             }
         }
 
+        public bool VerificaAutenticacao(string email, string senha)
+        {
+            DAO.Models.UsuarioModel _UsuarioDAO = DAO.Usuario.VerificaAutenticacao(email);
+            Usuario usuario = new Usuario();
+            usuario.Email = _UsuarioDAO.Email;
+            usuario.ClienteID = _UsuarioDAO.ClienteID;
+            usuario.Cpf = _UsuarioDAO.Cpf;
+            usuario.Nome = _UsuarioDAO.Nome;
+            usuario.Senha = _UsuarioDAO.Senha;
+            usuario.Ativo = _UsuarioDAO.Ativo;
+            usuario.DataRegistro = _UsuarioDAO.DataRegistro;
+            usuario.Tipo = _UsuarioDAO.Tipo;
+
+            if (usuario.Ativo==true)
+            {
+                if (senha == usuario.Senha)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Usuario DestalhesDoUsuario(string email)
         {
             DAO.Models.UsuarioModel _UsuarioDAO = DAO.Usuario.DestalhesDoUsuario(email);
@@ -569,6 +599,28 @@ namespace TEEService
                 return false;
             }
         }
+
+        public List<Usuario> ListarUsuarios(int ID)
+        {
+
+            List<DAO.Models.UsuarioModel> ListUsuarioModel = DAO.Usuario.TodosUsuarios(ID);
+            List<Usuario> ListaUsuarios = new List<Usuario>();
+            foreach (var item in ListUsuarioModel)
+            {
+                Usuario usuario = new Usuario();
+                usuario.Email = item.Email;
+                usuario.ClienteID = item.ClienteID;
+                usuario.Cpf = item.Cpf;
+                usuario.Nome = item.Nome;
+                usuario.Senha = item.Senha;
+                usuario.Ativo = item.Ativo;
+                usuario.DataRegistro = item.DataRegistro;
+                usuario.Tipo = item.Tipo;
+                ListaUsuarios.Add(usuario);
+            }
+            return ListaUsuarios;
+        }
+
 
         //----------------------------Conta------------------------------------------------------------
         public bool CadastrarConta(Conta _Conta)

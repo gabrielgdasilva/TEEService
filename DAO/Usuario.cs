@@ -48,9 +48,9 @@ namespace DAO
                 cmd.Parameters.Add("@cpf", SqlDbType.VarChar).Value = _Usuario.Cpf;
                 cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = _Usuario.Nome;
                 cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = _Usuario.Senha;
-                cmd.Parameters.Add("@ativo", SqlDbType.Bit).Value = _Usuario.Ativo;
-                cmd.Parameters.Add("@data_registro", SqlDbType.DateTime).Value = _Usuario.DataRegistro;
-                cmd.Parameters.Add("@tipo", SqlDbType.Int).Value = _Usuario.Tipo;
+                cmd.Parameters.Add("@ativo", SqlDbType.Bit).Value = true;
+                cmd.Parameters.Add("@data_registro", SqlDbType.DateTime).Value = DateTime.Now;
+                cmd.Parameters.Add("@tipo", SqlDbType.Int).Value = 3;
 
                 try
                 {
@@ -65,6 +65,51 @@ namespace DAO
                 }
             }
 
+        }
+
+        public static UsuarioModel VerificaAutenticacao(string email)
+        {
+            using (SqlConnection cnn = Conexoes.ConexaoSQL())
+            {
+                SqlCommand cmd = new SqlCommand();
+                cnn.Open();
+                cmd.Connection = cnn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "Select " +
+                                 "u.email," +
+                                 "u.id_cliente," +
+                                 "u.cpf," +
+                                 "u.nome," +
+                                 "u.senha," +
+                                 "u.ativo," +
+                                 "u.data_registro," +
+                                 "u.tipo" +
+                                 "FROM" +
+                                 "usuarios u" +
+                                 "WHERE " +
+                                 "t.email = @email";
+                cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = email;
+                UsuarioModel _Usuario = new UsuarioModel();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+
+                        _Usuario.Email = (dr["email"]).ToString();
+                        _Usuario.ClienteID = Convert.ToInt32(dr["id_cliente"]);
+                        _Usuario.Cpf = (dr["cpf"]).ToString();
+                        _Usuario.Nome = (dr["nome"]).ToString();
+                        _Usuario.Senha = (dr["senha"]).ToString();
+                        _Usuario.Ativo = Convert.ToBoolean(dr["ativo"]);
+                        _Usuario.DataRegistro = Convert.ToDateTime(dr["data_registro"]);
+                        _Usuario.Tipo = Convert.ToInt32(dr["tipo"]);
+
+                    }
+                }
+                dr.Close();
+                return _Usuario;
+            }
         }
 
         public static UsuarioModel DestalhesDoUsuario(string email)
@@ -87,8 +132,8 @@ namespace DAO
                                  "FROM" +
                                  "usuarios u" +
                                  "WHERE " +
-                                 "t.email = @email";
-                cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = email;
+                                 "u.email = @email";
+                cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
                 UsuarioModel _Usuario = new UsuarioModel();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
@@ -179,6 +224,49 @@ namespace DAO
                     return false;
                 }
 
+            }
+        }
+        public static List<UsuarioModel> TodosUsuarios(int ClienteID)
+        {
+            List<UsuarioModel> listaSaida = new List<UsuarioModel>();
+            using (SqlConnection cnn = Conexoes.ConexaoSQL())
+            {
+                SqlCommand cmd = new SqlCommand();
+                cnn.Open();
+                cmd.Connection = cnn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "Select " +
+                                 "u.email," +
+                                 "u.id_cliente," +
+                                 "u.cpf," +
+                                 "u.nome," +
+                                 "u.senha," +
+                                 "u.ativo," +
+                                 "u.data_registro," +
+                                 "u.tipo" +
+                                 "FROM" +
+                                 "usuarios u" +
+                                 "WHERE " +
+                                 "u.id_cliente = @id_cliente";
+                cmd.Parameters.Add("@id_cliente", SqlDbType.VarChar).Value = ClienteID;
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        UsuarioModel _Usuario = new UsuarioModel();
+                        _Usuario.Email = dr["email"].ToString();
+                        _Usuario.ClienteID = Convert.ToInt32(dr["id_cliente"]);
+                        _Usuario.Cpf = dr["cpf"].ToString();
+                        _Usuario.Nome = dr["nome"].ToString();
+                        _Usuario.Senha = dr["senha"].ToString();
+                        _Usuario.Ativo = Convert.ToBoolean(dr["ativo"]);
+                        _Usuario.DataRegistro = Convert.ToDateTime(dr["data_registro"]);
+                        _Usuario.Tipo = Convert.ToInt32(dr["tipo"]);
+                        listaSaida.Add(_Usuario);
+                    }
+                }
+                return listaSaida;
             }
         }
     }

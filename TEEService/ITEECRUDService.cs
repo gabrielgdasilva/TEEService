@@ -103,10 +103,16 @@ namespace TEEService
         Usuario DestalhesDoUsuario(string email);
 
         [OperationContract]
+        bool VerificaAutenticacao(string email, string senha);
+
+        [OperationContract]
         bool AtualizarUsuario(Usuario _Usuario);
 
         [OperationContract]
         bool DeletarUsuario(Usuario _Usuario);
+
+        [OperationContract]
+        List<Usuario> ListarUsuarios(int ClienteID);
 
         //----------------------------Contas----------------------------------------------------------------
         [OperationContract]

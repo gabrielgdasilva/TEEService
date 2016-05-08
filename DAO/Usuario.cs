@@ -77,18 +77,18 @@ namespace DAO
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "Select " +
                                  "u.email," +
-                                 "u.id_cliente," +
-                                 "u.cpf," +
-                                 "u.nome," +
-                                 "u.senha," +
-                                 "u.ativo," +
-                                 "u.data_registro," +
-                                 "u.tipo" +
-                                 "FROM" +
-                                 "usuarios u" +
+                                 "u.id_cliente, " +
+                                 "u.cpf, " +
+                                 "u.nome, " +
+                                 "u.senha, " +
+                                 "u.ativo, " +
+                                 "u.data_registro, " +
+                                 "u.tipo " +
+                                 "FROM " +
+                                 "usuarios u " +
                                  "WHERE " +
-                                 "t.email = @email";
-                cmd.Parameters.Add("@id", SqlDbType.VarChar).Value = email;
+                                 "u.email = @email";
+                cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
                 UsuarioModel _Usuario = new UsuarioModel();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)

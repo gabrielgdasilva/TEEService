@@ -508,7 +508,7 @@ namespace TEEService
             }
         }
 
-        public bool VerificaAutenticacao(string email, string senha)
+        public Usuario VerificaAutenticacao(string email, string senha)
         {
             DAO.Models.UsuarioModel _UsuarioDAO = DAO.Usuario.VerificaAutenticacao(email);
             Usuario usuario = new Usuario();
@@ -525,16 +525,17 @@ namespace TEEService
             {
                 if (senha == usuario.Senha)
                 {
-                    return true;
+                    return usuario;
                 }
                 else
                 {
-                    return false;
+                    
+                    return null;
                 }
             }
             else
             {
-                return false;
+                return null;
             }
         }
 

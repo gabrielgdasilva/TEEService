@@ -103,7 +103,7 @@ namespace TEEService
         Usuario DestalhesDoUsuario(string email);
 
         [OperationContract]
-        bool VerificaAutenticacao(string email, string senha);
+        Usuario VerificaAutenticacao(string email, string senha);
 
         [OperationContract]
         bool AtualizarUsuario(Usuario _Usuario);

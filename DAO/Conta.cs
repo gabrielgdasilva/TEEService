@@ -336,11 +336,11 @@ namespace DAO
                                   "c.demandaTUSD_Valor," +
                                   "c.subTotal," +
                                   "c.valorTotal," +
-                                  "c.id_bandeira" +
-                                 "FROM" +
-                                 "contas c"+
-                                 "WHERE"+
-                                 "c.id_fabrica = @id_fabrica";
+                                  "c.id_bandeira " +
+                                 "FROM " +
+                                 "contas c "+
+                                 "WHERE "+
+                                 "c.id_fabrica = @id_fabrica;";
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = FabricaID;
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)

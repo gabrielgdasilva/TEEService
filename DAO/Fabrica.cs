@@ -108,11 +108,11 @@ namespace DAO
                                  "f.id_cliente," +
                                  "f.cnpj_fabrica," +
                                  "f.endereco," +
-                                 "f.id_distribuidora," +
-                                 "FROM" +
-                                 "fabricas f"+
-                                 "WHERE"+
-                                 "f.id_cliente = @id_cliente";
+                                 "f.id_distribuidora " +
+                                 "FROM " +
+                                 "fabricas f "+
+                                 "WHERE "+
+                                 "f.id_cliente = @id_cliente;";
                 cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = ClienteID;
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)

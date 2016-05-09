@@ -511,18 +511,19 @@ namespace TEEService
         public Usuario VerificaAutenticacao(string email, string senha)
         {
             DAO.Models.UsuarioModel _UsuarioDAO = DAO.Usuario.VerificaAutenticacao(email);
-            Usuario usuario = new Usuario();
-            usuario.Email = _UsuarioDAO.Email;
-            usuario.ClienteID = _UsuarioDAO.ClienteID;
-            usuario.Cpf = _UsuarioDAO.Cpf;
-            usuario.Nome = _UsuarioDAO.Nome;
-            usuario.Senha = _UsuarioDAO.Senha;
-            usuario.Ativo = _UsuarioDAO.Ativo;
-            usuario.DataRegistro = _UsuarioDAO.DataRegistro;
-            usuario.Tipo = _UsuarioDAO.Tipo;
 
-            if (usuario.Ativo==true)
+            if (_UsuarioDAO != null)
             {
+                Usuario usuario = new Usuario();
+                usuario.Email = _UsuarioDAO.Email;
+                usuario.ClienteID = _UsuarioDAO.ClienteID;
+                usuario.Cpf = _UsuarioDAO.Cpf;
+                usuario.Nome = _UsuarioDAO.Nome;
+                usuario.Senha = _UsuarioDAO.Senha;
+                usuario.Ativo = _UsuarioDAO.Ativo;
+                usuario.DataRegistro = _UsuarioDAO.DataRegistro;
+                usuario.Tipo = _UsuarioDAO.Tipo;
+
                 if (senha == usuario.Senha)
                 {
                     return usuario;

@@ -91,9 +91,9 @@ namespace DAO
                 cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
                 UsuarioModel _Usuario = new UsuarioModel();
                 SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+                if (dr.Read())
                 {
-                    while (dr.Read())
+                    using (dr)
                     {
 
                         _Usuario.Email = (dr["email"]).ToString();
@@ -106,9 +106,14 @@ namespace DAO
                         _Usuario.Tipo = Convert.ToInt32(dr["tipo"]);
 
                     }
+
+                    return _Usuario;
                 }
-                dr.Close();
-                return _Usuario;
+                else
+                {
+                    return null;
+                }
+                
             }
         }
 

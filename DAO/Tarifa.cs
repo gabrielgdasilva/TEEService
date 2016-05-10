@@ -169,9 +169,9 @@ namespace DAO
                                  "t.tarifa_ultrapassagem_np," +
                                  "t.tarifa_ultrapassagem_fp," +
                                  "t.demanda_tusd," +
-                                 "t.id_bandeira" +
-                                 "FROM" +
-                                 "tarifas t";
+                                 "t.id_bandeira " +
+                                 "FROM " +
+                                 "tarifas t;";
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {

@@ -28,15 +28,15 @@ namespace DAO
                                   "cnpj_fabrica," +
                                   "endereco," +
                                   "id_distribuidora" +
-                                  ")" +
-                                  "VALUES" +
-                                  "(" +
+                                  ") " +
+                                  "VALUES " +
+                                  " (" +
                                   "@id_cliente," +
                                   "@cnpj_fabrica," +
                                   "@endereco," +
-                                  "@id_distribuidora" +
-                                  ")" +
-                                  "SELECT SCOPE_IDENTITY() AS ID";
+                                  "@id_distribuidora " +
+                                  ") " +
+                                  "SELECT SCOPE_IDENTITY() AS ID ";
                 cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = _Fabrica.ClienteID;
                 cmd.Parameters.Add("@cnpj_fabrica", SqlDbType.VarChar).Value = _Fabrica.Cnpj;
                 cmd.Parameters.Add("@endereco", SqlDbType.VarChar).Value = _Fabrica.Endereco;
@@ -48,7 +48,7 @@ namespace DAO
                     return true;
 
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
                     return false;

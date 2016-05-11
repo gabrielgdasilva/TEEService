@@ -93,7 +93,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select d.id_distribuidora, d.nome, d.cnpj_empresa, FROM distribuidoras d";
+                cmd.CommandText = "Select d.id_distribuidora, d.nome, d.cnpj_empresa FROM distribuidoras d";
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {

@@ -15,7 +15,7 @@ namespace DAO
         public static List<GraficoModel> DadosParaGrafico(int FabricaID)
         {
             List<GraficoModel> listaSaida = new List<GraficoModel>();
-            using (SqlConnection cnn = Conexoes.ConexaoSQL())
+            /*using (SqlConnection cnn = Conexoes.ConexaoSQL())
             {
                 SqlCommand cmd = new SqlCommand();
                 cnn.Open();
@@ -122,7 +122,7 @@ namespace DAO
                         listaSaida.Add(_Conta);
                     }
                 }
-            }
+            }*/
 
             using (SqlConnection cnn = Conexoes.ConexaoSQL())
             {

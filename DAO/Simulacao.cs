@@ -28,7 +28,98 @@ namespace DAO
             ContasDaFabrica = Conta.TodasContas(fabricaID);
 
             DateTime HoraDaSimulacao = DateTime.Now;
+
+            //Deleta simulações anteriores
+            bool jaTemSimulacao = false;
             
+            using (SqlConnection cnn = Conexoes.ConexaoSQL())
+            {
+                SqlCommand cmd = new SqlCommand();
+                cnn.Open();
+                cmd.Connection = cnn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT " +
+                                  "s.data_simulacao," +
+                                  "s.data_referencia," +
+                                  "s.id_tarifa_origem," +
+                                  "s.id_tarifa_destino," +
+                                  "s.id_fabrica," +
+                                  "s.id_distribuidora," +
+                                  "s.id_tipocontrato," +
+                                  "s.id_tiposubGrupo," +
+                                  "s.id_bandeira," +
+                                  "s.consumoNaPontaTUSD_Registrado," +
+                                  "s.consumoForaPontaTUSD_Registrado," +
+                                  "s.consumoNaPontaTE_Registrado," +
+                                  "s.consumoForaPontaTE_Registrado," +
+                                  "s.consumoUltrapassagemNaPonta_Registrado," +
+                                  "s.consumoUltrapassagemForaPonta_Registrado," +
+                                  "s.demandaTUSD_Registrado," +
+                                  "s.consumoNaPontaTUSD_Contratado," +
+                                  "s.consumoForaPontaTUSD_Contratado," +
+                                  "s.consumoNaPontaTE_Contratado," +
+                                  "s.consumoForaPontaTE_Contratado," +
+                                  "s.demandaTUSD_Contratado," +
+                                  "s.consumoNaPontaTUSD_Faturado," +
+                                  "s.consumoForaPontaTUSD_Faturado," +
+                                  "s.consumoNaPontaTE_Faturado," +
+                                  "s.consumoForaPontaTE_Faturado," +
+                                  "s.consumoUltrapassagemNaPonta_Faturado," +
+                                  "s.consumoUltrapassagemForaPonta_Faturado," +
+                                  "s.demandaTUSD_Faturado," +
+                                  "s.consumoNaPontaTUSD_TarifaPreco," +
+                                  "s.consumoForaPontaTUSD_TarifaPreco," +
+                                  "s.consumoNaPontaTE_TarifaPreco," +
+                                  "s.consumoForaPontaTE_TarifaPreco," +
+                                  "s.consumoUltrapassagemNaPonta_TarifaPreco," +
+                                  "s.consumoUltrapassagemForaPonta_TarifaPreco," +
+                                  "s.demandaTUSD_TarifaPreco," +
+                                  "s.consumoNaPontaTUSD_Valor," +
+                                  "s.consumoForaPontaTUSD_Valor," +
+                                  "s.consumoNaPontaTE_Valor," +
+                                  "s.consumoForaPontaTE_Valor," +
+                                  "s.consumoUltrapassagemNaPonta_Valor," +
+                                  "s.consumoUltrapassagemForaPonta_Valor," +
+                                  "s.demandaTUSD_Valor," +
+                                  "s.subTotal," +
+                                  "s.valorTotal," +
+                                  "s.id_tipocontrato_destino " +
+                                 "FROM " +
+                                 "simulacoes s " +
+                                 "WHERE " +
+                                 "s.id_fabrica = @id_fabrica";
+                cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = fabricaID;
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    jaTemSimulacao = true;
+                }
+            }
+            //Deleta após verificar que já tem registros
+            if (jaTemSimulacao)
+            {
+                try
+                {
+                    using (SqlConnection cnn = Conexoes.ConexaoSQL())
+                    {
+                        SqlCommand cmd = new SqlCommand();
+                        cnn.Open();
+                        cmd.Connection = cnn;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "DELETE " +
+                                          "FROM simulacoes s " +
+                                          "WHERE s.id_fabrica = @id_fabrica";
+                        cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = fabricaID;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+
             try
             {
                 foreach (var item in Contratos)
@@ -75,6 +166,8 @@ namespace DAO
                                                  simulacao.DemandaTUSD_Valor;
 
                             simulacao.ValorTotal = simulacao.SubTotal;
+
+                            
 
                             // persistencia dos dados simulados
                             using (SqlConnection cnn = Conexoes.ConexaoSQL())

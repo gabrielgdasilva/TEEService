@@ -21,7 +21,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "c.data_referencia," +
                                   "c.id_tarifa," +
                                   "c.id_fabrica," +
@@ -63,10 +63,10 @@ namespace DAO
                                   "c.demandaTUSD_Valor," +
                                   "c.subTotal," +
                                   "c.valorTotal," +
-                                  "c.id_bandeira" +
-                                 "FROM" +
-                                 "contas c" +
-                                 "WHERE" +
+                                  "c.id_bandeira " +
+                                 "FROM " +
+                                 "contas c " +
+                                 "WHERE " +
                                  "c.id_fabrica = @id_fabrica";
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = FabricaID;
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -130,7 +130,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "s.data_simulacao," +
                                   "s.data_referencia," +
                                   "s.id_tarifa_origem," +
@@ -175,10 +175,10 @@ namespace DAO
                                   "s.demandaTUSD_Valor," +
                                   "s.subTotal," +
                                   "s.valorTotal," +
-                                  "s.id_tipocontrato_destino" +
-                                 "FROM" +
-                                 "simulacoes s" +
-                                 "WHERE" +
+                                  "s.id_tipocontrato_destino " +
+                                 "FROM " +
+                                 "simulacoes s " +
+                                 "WHERE " +
                                  "s.id_fabrica = @id_fabrica";
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = FabricaID;
                 SqlDataReader dr = cmd.ExecuteReader();

@@ -66,7 +66,7 @@ namespace DAO
                                   "valorTotal," +
                                   "id_bandeira" +
                                   ")" +
-                                  "VALUES" +
+                                  "VALUES " +
                                   "(" +
                                   "@data_referencia," +
                                   "@id_tarifa," +
@@ -110,7 +110,7 @@ namespace DAO
                                   "@subTotal," +
                                   "@valorTotal," +
                                   "@id_bandeira" +
-                                  ")";
+                                  ") ";
                 cmd.Parameters.Add("@data_referencia", SqlDbType.DateTime).Value = _Conta.dataReferencia;
                 cmd.Parameters.Add("@id_tarifa", SqlDbType.Int).Value = _Conta.TarifaID;
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = _Conta.FabricaID;
@@ -179,7 +179,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "c.data_referencia," +
                                   "c.id_tarifa," +
                                   "c.id_fabrica," +
@@ -221,9 +221,9 @@ namespace DAO
                                   "c.demandaTUSD_Valor," +
                                   "c.subTotal," +
                                   "c.valorTotal," +
-                                  "c.id_bandeira" +
-                                 "FROM" +
-                                 "contas c" +
+                                  "c.id_bandeira " +
+                                 "FROM " +
+                                 "contas c " +
                                  "WHERE " +
                                  "c.id_fabrica = @id_fabrica AND"+
                                  "(c.data_referencia BETWEEN @data_referencia1 AND @data_referencia2)";
@@ -294,7 +294,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "c.data_referencia," +
                                   "c.id_tarifa," +
                                   "c.id_fabrica," +
@@ -407,7 +407,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "c.data_referencia," +
                                   "c.id_tarifa," +
                                   "c.id_fabrica," +
@@ -449,9 +449,9 @@ namespace DAO
                                   "c.demandaTUSD_Valor," +
                                   "c.subTotal," +
                                   "c.valorTotal," +
-                                  "c.id_bandeira" +
-                                 "FROM" +
-                                 "contas c" +
+                                  "c.id_bandeira " +
+                                 "FROM " +
+                                 "contas c " +
                                  "WHERE " +
                                  "c.id_fabrica = @id_fabrica AND"+
                                  "(c.data_referencia BETWEEN @data_referencia1 AND @data_referencia2)";
@@ -524,8 +524,8 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "UPDATE " +
-                                  "contas" +
-                                  "SET" +
+                                  "contas " +
+                                  "SET " +
                                   "data_referencia = @data_referencia," +
                                   "id_tarifa = @id_tarifa," +
                                   "id_fabrica = @id_fabrica," +
@@ -567,9 +567,9 @@ namespace DAO
                                   "demandaTUSD_Valor = @demandaTUSD_Valor," +
                                   "subTotal = @subTotal," +
                                   "valorTotal = @valorTotal," +
-                                  "id_bandeira = @id_bandeira" +
+                                  "id_bandeira = @id_bandeira " +
                                   "WHERE " +
-                                  "c.id_fabrica = @id_fabrica AND" +
+                                  "c.id_fabrica = @id_fabrica AND " +
                                   "(c.data_referencia BETWEEN @data_referencia1 AND @data_referencia2)";
                 cmd.Parameters.Add("@data_referencia1", SqlDbType.DateTime).Value = _Conta.dataReferencia;
                 cmd.Parameters.Add("@data_referencia2", SqlDbType.DateTime).Value = _Conta.dataReferencia.AddDays(1);
@@ -638,7 +638,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "DELETE FROM contas WHERE id_fabrica = @id_fabrica AND"+
+                cmd.CommandText = "DELETE FROM contas WHERE id_fabrica = @id_fabrica AND "+
                     "(data_referencia BETWEEN @data_referencia1 AND @data_referencia2)"; ;
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = _Conta.FabricaID;
                 cmd.Parameters.Add("@data_referencia1", SqlDbType.DateTime).Value = _Conta.dataReferencia;

@@ -64,14 +64,14 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                  "f.id_fabrica," +
                                  "f.id_cliente," +
                                  "f.cnpj_fabrica," +
                                  "f.endereco," +
-                                 "f.id_distribuidora" +
-                                 "FROM" +
-                                 "fabricas f" +
+                                 "f.id_distribuidora " +
+                                 "FROM " +
+                                 "fabricas f " +
                                  "WHERE " +
                                  "f.id_fabrica = @id_fabrica";
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = id;
@@ -103,7 +103,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                  "f.id_fabrica," +
                                  "f.id_cliente," +
                                  "f.cnpj_fabrica," +
@@ -141,8 +141,8 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "UPDATE " +
-                                  "fabricas" +
-                                  "SET" +
+                                  "fabricas " +
+                                  "SET " +
                                   "id_cliente = @id_cliente, " +
                                   "cnpj_fabrica = @cnpj_fabrica," +
                                   "endereco = @endereco," +

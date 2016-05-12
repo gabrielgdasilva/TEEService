@@ -21,15 +21,15 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "c.id_cliente," +
                                   "c.nome," +
                                   "c.cnpj_empresa," +
                                   "c.razao_social," +
-                                  "c.endereco," +
-                                  "FROM" +
-                                  "clientes c" +
-                                  "WHERE" +
+                                  "c.endereco " +
+                                  "FROM " +
+                                  "clientes c " +
+                                  "WHERE " +
                                   "c.id = @id";
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
                 ClienteModel _Cliente = new ClienteModel();
@@ -66,14 +66,14 @@ namespace DAO
                                   "   cnpj_empresa, " +
                                   "   razao_social, " +
                                   "   endereco " +
-                                  ")" +
+                                  ") " +
                                   "VALUES " +
                                   "(" +
                                   "   @nome, " +
                                   "   @cnpj_empresa, " +
                                   "   @razao_social, " +
                                   "   @endereco " +
-                                  ")" +
+                                  ") " +
                                   "SELECT SCOPE_IDENTITY() AS ID";
                 cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = _Cliente.Nome;
                 cmd.Parameters.Add("@cnpj_empresa", SqlDbType.VarChar).Value = _Cliente.Cnpj;

@@ -25,10 +25,10 @@ namespace DAO
                                   "(" +
                                   "string_tipocontrato" +
                                   ")" +
-                                  "VALUES" +
+                                  "VALUES " +
                                   "(" +
                                   "@string_tipocontrato" +
-                                  ")" +
+                                  ") " +
                                   "SELECT SCOPE_IDENTITY() AS ID";
                 cmd.Parameters.Add("@string_tipocontrato", SqlDbType.VarChar).Value = _TipoContrato.TipoContratoString;
                 
@@ -54,11 +54,11 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "c.id_tipocontrato,"+
-                                  "c.string_tipocontrato" +
-                                  "FROM" +
-                                  "tipos_contrato c" +
+                                  "c.string_tipocontrato " +
+                                  "FROM " +
+                                  "tipos_contrato c " +
                                   "WHERE " +
                                   "c.id_tipocontrato = @id";
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;

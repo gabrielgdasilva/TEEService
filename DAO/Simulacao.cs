@@ -158,8 +158,8 @@ namespace DAO
                                                   "subTotal," +
                                                   "valorTotal," +
                                                   "id_tipocontrato_destino" +
-                                                  ")" +
-                                                  "VALUES" +
+                                                  ") " +
+                                                  "VALUES " +
                                                   "(" +
                                                   "@data_referencia," +
                                                   "@id_tarifa," +
@@ -204,7 +204,7 @@ namespace DAO
                                                   "@subTotal," +
                                                   "@valorTotal," +
                                                   "@id_tipocontrato_destino" +
-                                                  ")" +
+                                                  ") " +
                                                   "SELECT SCOPE_IDENTITY() AS ID";
                                 cmd.Parameters.Add("@data_simulacao", SqlDbType.DateTime).Value = simulacao.DataDaSimulacao;
                                 cmd.Parameters.Add("@data_referencia", SqlDbType.DateTime).Value = itensContas.dataReferencia;

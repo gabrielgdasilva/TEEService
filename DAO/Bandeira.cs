@@ -21,14 +21,14 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "INSERT INTO " +
-                                  "bandeiras"+
+                                  "bandeiras "+
                                   "("+
                                   "string_bandeira"+
-                                  ")"+
-                                  "VALUES"+
+                                  ") "+
+                                  "VALUES "+
                                   "("+
                                   "@string_bandeira"+
-                                  ")"+
+                                  ") "+
                                   "SELECT SCOPE_IDENTITY() AS ID";
                 cmd.Parameters.Add("@string_bandeira", SqlDbType.VarChar).Value = _Bandeira.BandeiraString;
                 //int BandeiraID = 0;
@@ -55,11 +55,11 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "b.id_bandeira," +
-                                  "b.string_bandeira" +
-                                  "FROM" +
-                                  "bandeiras b" +
+                                  "b.string_bandeira " +
+                                  "FROM " +
+                                  "bandeiras b " +
                                   "WHERE " +
                                   "b.id_bandeira = @id_bandeira";
                 cmd.Parameters.Add("@id_bandeira", SqlDbType.Int).Value = id;

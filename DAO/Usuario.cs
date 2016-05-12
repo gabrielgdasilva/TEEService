@@ -21,7 +21,7 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "INSERT INTO " +
-                                  "usuarios" +
+                                  "usuarios " +
                                   "(" +
                                   "email," +
                                   "id_cliente," +
@@ -32,7 +32,7 @@ namespace DAO
                                   "data_registro," +
                                   "tipo" +
                                   ")" +
-                                  "VALUES" +
+                                  "VALUES " +
                                   "(" +
                                   "@email," +
                                   "@id_cliente," +
@@ -42,7 +42,7 @@ namespace DAO
                                   "@ativo," +
                                   "@data_registro," +
                                   "@tipo" +
-                                  ")";
+                                  ") ";
                 cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = _Usuario.Email;
                 cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = _Usuario.ClienteID;
                 cmd.Parameters.Add("@cpf", SqlDbType.VarChar).Value = _Usuario.Cpf;
@@ -75,7 +75,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                  "u.email," +
                                  "u.id_cliente, " +
                                  "u.cpf, " +
@@ -125,7 +125,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                  "u.email," +
                                  "u.id_cliente," +
                                  "u.cpf," +
@@ -133,9 +133,9 @@ namespace DAO
                                  "u.senha," +
                                  "u.ativo," +
                                  "u.data_registro," +
-                                 "u.tipo" +
-                                 "FROM" +
-                                 "usuarios u" +
+                                 "u.tipo " +
+                                 "FROM " +
+                                 "usuarios u " +
                                  "WHERE " +
                                  "u.email = @email";
                 cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
@@ -171,15 +171,15 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "UPDATE " +
-                                  "usuarios" +
-                                  "SET" +
+                                  "usuarios " +
+                                  "SET " +
                                   "id_cliente = @id_cliente," +
                                   "cpf = @cpf," +
                                   "nome = @nome," +
                                   "senha = @senha," +
                                   "ativo = @ativo," +
                                   "data_registro = @data_registro," +
-                                  "tipo = @tipo," +
+                                  "tipo = @tipo " +
                                   "WHERE " +
                                   "email = @email";
                 cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = _Usuario.Email;
@@ -240,7 +240,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                  "u.email," +
                                  "u.id_cliente," +
                                  "u.cpf," +
@@ -248,9 +248,9 @@ namespace DAO
                                  "u.senha," +
                                  "u.ativo," +
                                  "u.data_registro," +
-                                 "u.tipo" +
-                                 "FROM" +
-                                 "usuarios u" +
+                                 "u.tipo " +
+                                 "FROM " +
+                                 "usuarios u " +
                                  "WHERE " +
                                  "u.id_cliente = @id_cliente";
                 cmd.Parameters.Add("@id_cliente", SqlDbType.VarChar).Value = ClienteID;

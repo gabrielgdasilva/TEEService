@@ -154,7 +154,7 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                  "t.id_tarifa," +
                                  "t.id_distribuidora," +
                                  "t.id_tipoContrato," +
@@ -209,8 +209,8 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "UPDATE " +
-                                  "tarifas" +
-                                  "SET" +
+                                  "tarifas " +
+                                  "SET " +
                                   "id_tarifa = @id_tarifa, " +
                                   "id_distribuidora = @id_distribuidora," +
                                   "id_tipoContrato = @id_tipoContrato," +

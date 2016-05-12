@@ -21,14 +21,14 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "INSERT INTO " +
-                                  "tipos_subgrupo" +
+                                  "tipos_subgrupo " +
                                   "(" +
                                   "string_tiposubgrupo" +
-                                  ")" +
-                                  "VALUES" +
+                                  ") " +
+                                  "VALUES " +
                                   "(" +
                                   "@string_tiposubgrupo" +
-                                  ")" +
+                                  ") " +
                                   "SELECT SCOPE_IDENTITY() AS ID";
                 cmd.Parameters.Add("@string_tiposubgrupo", SqlDbType.VarChar).Value = _SubGrupo.TipoSubGrupoString;
                 
@@ -54,11 +54,11 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "g.id_tiposubgrupo," +
-                                  "g.string_tiposubgrupo" +
-                                  "FROM" +
-                                  "tipos_subgrupo g" +
+                                  "g.string_tiposubgrupo " +
+                                  "FROM " +
+                                  "tipos_subgrupo g " +
                                   "WHERE " +
                                   "g.id_tiposubgrupo = @id";
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;

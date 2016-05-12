@@ -21,16 +21,16 @@ namespace DAO
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "INSERT INTO " +
-                                  "distribuidoras" +
+                                  "distribuidoras " +
                                   "(" +
                                   "nome," +
                                   "cnpj_empresa"+
                                   ")" +
-                                  "VALUES" +
+                                  "VALUES " +
                                   "(" +
                                   "@nome" +
                                   "@cnpj_empresa" +
-                                  ")" +
+                                  ") " +
                                   "SELECT SCOPE_IDENTITY() AS ID";
                 cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = _Distribuidora.Nome;
                 cmd.Parameters.Add("@cnpj_empresa", SqlDbType.VarChar).Value = _Distribuidora.Cnpj;
@@ -59,12 +59,12 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "Select " +
+                cmd.CommandText = "SELECT " +
                                   "d.id_distribuidora," +
                                   "d.nome"+
-                                  "d.cnpj_empresa" +
-                                  "FROM" +
-                                  "distribuidoras d" +
+                                  "d.cnpj_empresa " +
+                                  "FROM " +
+                                  "distribuidoras d " +
                                   "WHERE " +
                                   "d.id_distribuidora = @id";
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;

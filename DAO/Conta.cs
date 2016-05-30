@@ -526,9 +526,7 @@ namespace DAO
                 cmd.CommandText = "UPDATE " +
                                   "contas " +
                                   "SET " +
-                                  "data_referencia = @data_referencia," +
                                   "id_tarifa = @id_tarifa," +
-                                  "id_fabrica = @id_fabrica," +
                                   "id_distribuidora = @id_distribuidora," +
                                   "id_tipocontrato = @id_tipocontrato," +
                                   "id_tiposubGrupo = @id_tiposubGrupo," +
@@ -569,10 +567,9 @@ namespace DAO
                                   "valorTotal = @valorTotal," +
                                   "id_bandeira = @id_bandeira " +
                                   "WHERE " +
-                                  "c.id_fabrica = @id_fabrica AND " +
-                                  "(c.data_referencia BETWEEN @data_referencia1 AND @data_referencia2)";
-                cmd.Parameters.Add("@data_referencia1", SqlDbType.DateTime).Value = _Conta.dataReferencia;
-                cmd.Parameters.Add("@data_referencia2", SqlDbType.DateTime).Value = _Conta.dataReferencia.AddDays(1);
+                                  "id_fabrica = @id_fabrica AND " +
+                                  "data_referencia = @data_referencia";
+                cmd.Parameters.Add("@data_referencia", SqlDbType.DateTime).Value = _Conta.dataReferencia;
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = _Conta.FabricaID;
 
                 cmd.Parameters.Add("@id_tarifa", SqlDbType.Int).Value = _Conta.TarifaID;
@@ -622,7 +619,7 @@ namespace DAO
                     return true;
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     //throw;
                     return false;

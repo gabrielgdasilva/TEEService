@@ -12,7 +12,6 @@ namespace DAO
 {
     public static class Fabrica
     {
-        
         public static bool CadastrarFabrica(FabricaModel _Fabrica)
         {
             using (SqlConnection cnn = Conexoes.ConexaoSQL())
@@ -48,9 +47,8 @@ namespace DAO
                     return true;
 
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-
                     return false;
                 }
             }

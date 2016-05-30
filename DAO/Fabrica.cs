@@ -143,16 +143,14 @@ namespace DAO
                 cmd.CommandText = "UPDATE " +
                                   "fabricas " +
                                   "SET " +
-                                  "id_cliente = @id_cliente, " +
                                   "cnpj_fabrica = @cnpj_fabrica," +
                                   "endereco = @endereco," +
                                   "id_distribuidora = @id_distribuidora " +
                                   "WHERE "+
                                   "id_fabrica = @id";
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = _Fabrica.FabricaID;
-                cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = _Fabrica.ClienteID;
                 cmd.Parameters.Add("@cnpj_fabrica", SqlDbType.VarChar).Value = _Fabrica.Cnpj;
-                cmd.Parameters.Add("@endereco", SqlDbType.DateTime).Value = _Fabrica.Endereco;
+                cmd.Parameters.Add("@endereco", SqlDbType.VarChar).Value = _Fabrica.Endereco;
                 cmd.Parameters.Add("@id_distribuidora", SqlDbType.Int).Value = _Fabrica.DistribuidoraID;
 
                 try
@@ -174,15 +172,22 @@ namespace DAO
             using (SqlConnection cnn = Conexoes.ConexaoSQL())
             {
                 SqlCommand cmd = new SqlCommand();
+                SqlParameter status = new SqlParameter();
                 cnn.Open();
                 cmd.Connection = cnn;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "DELETE FROM fabricas WHERE id_fabrica = @id_fabrica";
-                cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = _Fabrica.FabricaID;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "ExcluirFabrica";
+                cmd.Parameters.Add("@FabricaID", SqlDbType.Int).Value = _Fabrica.FabricaID;
+
+                status.ParameterName = "@Status";
+                status.SqlDbType = System.Data.SqlDbType.Int;
+                status.Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(status);
+
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    return true;
+                    return (Convert.ToInt32(status.Value) != 0);
 
                 }
                 catch (Exception)

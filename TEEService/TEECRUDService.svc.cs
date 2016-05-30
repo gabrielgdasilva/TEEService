@@ -146,7 +146,7 @@ namespace TEEService
             fabricaDAO.Endereco = _fabrica.Endereco;
             fabricaDAO.DistribuidoraID = _fabrica.DistribuidoraID;
 
-            if (DAO.Fabrica.CadastrarFabrica(fabricaDAO))
+            if (DAO.Fabrica.AtualizarFabrica(fabricaDAO))
             {
                 return true;
             }

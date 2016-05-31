@@ -32,7 +32,7 @@ namespace DAO
                                   "data_registro," +
                                   "tipo" +
                                   ")" +
-                                  "VALUES " +
+                                  " VALUES " +
                                   "(" +
                                   "@email," +
                                   "@id_cliente," +
@@ -42,15 +42,15 @@ namespace DAO
                                   "@ativo," +
                                   "@data_registro," +
                                   "@tipo" +
-                                  ") ";
+                                  ");";
                 cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = _Usuario.Email;
                 cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = _Usuario.ClienteID;
-                cmd.Parameters.Add("@cpf", SqlDbType.VarChar).Value = _Usuario.Cpf;
-                cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = _Usuario.Nome;
+                cmd.Parameters.Add("@cpf", SqlDbType.VarChar).Value = (_Usuario.Cpf != null) ? _Usuario.Cpf : "";
+                cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = (_Usuario.Nome != null) ? _Usuario.Nome : "";
                 cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = _Usuario.Senha;
                 cmd.Parameters.Add("@ativo", SqlDbType.Bit).Value = true;
                 cmd.Parameters.Add("@data_registro", SqlDbType.DateTime).Value = DateTime.Now;
-                cmd.Parameters.Add("@tipo", SqlDbType.Int).Value = 3;
+                cmd.Parameters.Add("@tipo", SqlDbType.Int).Value = 2;
 
                 try
                 {
@@ -58,9 +58,8 @@ namespace DAO
                     return true;
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
                     return false;
                 }
             }
@@ -173,23 +172,23 @@ namespace DAO
                 cmd.CommandText = "UPDATE " +
                                   "usuarios " +
                                   "SET " +
-                                  "id_cliente = @id_cliente," +
-                                  "cpf = @cpf," +
-                                  "nome = @nome," +
-                                  "senha = @senha," +
-                                  "ativo = @ativo," +
-                                  "data_registro = @data_registro," +
-                                  "tipo = @tipo " +
-                                  "WHERE " +
-                                  "email = @email";
+                                  //"id_cliente = @id_cliente," +
+                                  //"cpf = @cpf," +
+                                  "nome = @nome" +
+                                  //"senha = @senha," +
+                                  //"ativo = @ativo," +
+                                  //"data_registro = @data_registro," +
+                                  //"tipo = @tipo " +
+                                  " WHERE " +
+                                  " email = @email;";
                 cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = _Usuario.Email;
-                cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = _Usuario.ClienteID;
-                cmd.Parameters.Add("@cpf", SqlDbType.VarChar).Value = _Usuario.Cpf;
+                //cmd.Parameters.Add("@id_cliente", SqlDbType.Int).Value = _Usuario.ClienteID;
+                //cmd.Parameters.Add("@cpf", SqlDbType.VarChar).Value = _Usuario.Cpf;
                 cmd.Parameters.Add("@nome", SqlDbType.VarChar).Value = _Usuario.Nome;
-                cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = _Usuario.Senha;
-                cmd.Parameters.Add("@ativo", SqlDbType.Bit).Value = _Usuario.Ativo;
-                cmd.Parameters.Add("@data_registro", SqlDbType.DateTime).Value = _Usuario.DataRegistro;
-                cmd.Parameters.Add("@tipo", SqlDbType.Int).Value = _Usuario.Tipo;
+                //cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = _Usuario.Senha;
+                //cmd.Parameters.Add("@ativo", SqlDbType.Bit).Value = _Usuario.Ativo;
+                //cmd.Parameters.Add("@data_registro", SqlDbType.DateTime).Value = _Usuario.DataRegistro;
+                //cmd.Parameters.Add("@tipo", SqlDbType.Int).Value = _Usuario.Tipo;
 
 
 
@@ -199,7 +198,7 @@ namespace DAO
                     return true;
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     //throw;
                     return false;
@@ -215,17 +214,18 @@ namespace DAO
                 cnn.Open();
                 cmd.Connection = cnn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "DELETE FROM usuarios WHERE email = @email";
-                cmd.Parameters.Add("@email", SqlDbType.Int).Value = _Usuario.Email;
+                //cmd.CommandText = "DELETE FROM usuarios WHERE email = @email";
+                cmd.CommandText = "UPDATE usuarios SET Ativo = @ativo WHERE email = @email";
+                cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = _Usuario.Email;
+                cmd.Parameters.Add("@ativo", SqlDbType.Bit).Value = _Usuario.Ativo;
                 try
                 {
                     cmd.ExecuteNonQuery();
                     return true;
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
                     return false;
                 }
 

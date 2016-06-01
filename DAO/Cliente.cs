@@ -30,7 +30,7 @@ namespace DAO
                                   "FROM " +
                                   "clientes c " +
                                   "WHERE " +
-                                  "c.id = @id";
+                                  "c.id_cliente = @id";
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
                 ClienteModel _Cliente = new ClienteModel();
                 SqlDataReader dr = cmd.ExecuteReader();

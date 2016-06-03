@@ -12,7 +12,7 @@ namespace DAO
 {
     public static class Grafico
     {
-        public static List<GraficoModel> DadosParaGrafico(int FabricaID)
+        public static List<GraficoModel> DadosParaGrafico(int FabricaID, int ContratoID)
         {
             List<GraficoModel> listaSaida = new List<GraficoModel>();
             /*using (SqlConnection cnn = Conexoes.ConexaoSQL())
@@ -179,8 +179,12 @@ namespace DAO
                                  "FROM " +
                                  "simulacoes s " +
                                  "WHERE " +
-                                 "s.id_fabrica = @id_fabrica";
+                                 "s.id_fabrica = @id_fabrica " +
+                                 "s.id_tipocontrato = @id_contrato;";
+
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = FabricaID;
+                cmd.Parameters.Add("@id_contrato", SqlDbType.Int).Value = ContratoID;
+
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {

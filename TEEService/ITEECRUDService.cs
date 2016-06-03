@@ -139,7 +139,7 @@ namespace TEEService
 
         //----------------------------Grafico------------------------------------------------------------------
         [OperationContract]
-        List<Grafico> DadosParaGrafico(int FabricaID);
+        List<Grafico> DadosParaGrafico(int FabricaID, int ContratoID);
 
 
     }

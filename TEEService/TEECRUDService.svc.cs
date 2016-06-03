@@ -973,9 +973,9 @@ namespace TEEService
 
         //----------------------------Grafico--------------------------------------------------------------
 
-        public List<Grafico> DadosParaGrafico(int FabricaID)
+        public List<Grafico> DadosParaGrafico(int FabricaID, int ContratoID)
         {
-            List<DAO.Models.GraficoModel> ListGraficoDAO = DAO.Grafico.DadosParaGrafico(FabricaID);
+            List<DAO.Models.GraficoModel> ListGraficoDAO = DAO.Grafico.DadosParaGrafico(FabricaID, ContratoID);
             List<Grafico> listaGrafico = new List<Grafico>();
             foreach (var item in ListGraficoDAO)
             {

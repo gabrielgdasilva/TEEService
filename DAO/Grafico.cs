@@ -178,66 +178,70 @@ namespace DAO
                                   "s.id_tipocontrato_destino " +
                                  "FROM " +
                                  "simulacoes s " +
-                                 "WHERE " +
-                                 "s.id_fabrica = @id_fabrica " +
-                                 "s.id_tipocontrato = @id_contrato;";
+                                 "WHERE s.id_fabrica = @id_fabrica " +
+                                 "AND s.id_tipocontrato_destino = @id_contrato;";
 
                 cmd.Parameters.Add("@id_fabrica", SqlDbType.Int).Value = FabricaID;
                 cmd.Parameters.Add("@id_contrato", SqlDbType.Int).Value = ContratoID;
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
+                try
                 {
-                    while (dr.Read())
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
                     {
-                        GraficoModel _Simulacao = new GraficoModel();
-                        _Simulacao.DataDaSimulacao = Convert.ToDateTime(dr["data_simulacao"]);
-                        _Simulacao.DataReferencia = Convert.ToDateTime(dr["data_referencia"]);
-                        _Simulacao.TarifaOrigemID = Convert.ToInt32(dr["id_tarifa_origem"]);
-                        _Simulacao.TarifaDestinoID = Convert.ToInt32(dr["id_tarifa_destino"]);
-                        _Simulacao.FabricaID = Convert.ToInt32(dr["id_fabrica"]);
-                        _Simulacao.DistribuidoraID = Convert.ToInt32(dr["id_distribuidora"]);
-                        _Simulacao.TipoContratoID = Convert.ToInt32(dr["id_tipocontrato"]);
-                        _Simulacao.TipoSubGrupoID = Convert.ToInt32(dr["id_tiposubGrupo"]);
-                        _Simulacao.BandeiraID = Convert.ToInt32(dr["id_bandeira"]);
-                        _Simulacao.ConsumoNaPontaTUSD_Registrado = Convert.ToSingle(dr["consumoNaPontaTUSD_Registrado"]);
-                        _Simulacao.ConsumoForaPontaTUSD_Registrado = Convert.ToSingle(dr["consumoForaPontaTUSD_Registrado"]);
-                        _Simulacao.ConsumoNaPontaTE_Registrado = Convert.ToSingle(dr["consumoNaPontaTE_Registrado"]);
-                        _Simulacao.ConsumoForaPontaTE_Registrado = Convert.ToSingle(dr["consumoForaPontaTE_Registrado"]);
-                        _Simulacao.ConsumoUltrapassagemNaPonta_Registrado = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_Registrado"]);
-                        _Simulacao.ConsumoUltrapassagemForaPonta_Registrado = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_Registrado"]);
-                        _Simulacao.DemandaTUSD_Registrado = Convert.ToSingle(dr["demandaTUSD_Registrado"]);
-                        _Simulacao.ConsumoNaPontaTUSD_Contratado = Convert.ToSingle(dr["consumoNaPontaTUSD_Contratado"]);
-                        _Simulacao.ConsumoForaPontaTUSD_Contratado = Convert.ToSingle(dr["consumoForaPontaTUSD_Contratado"]);
-                        _Simulacao.ConsumoNaPontaTE_Contratado = Convert.ToSingle(dr["consumoNaPontaTE_Contratado"]);
-                        _Simulacao.ConsumoForaPontaTE_Contratado = Convert.ToSingle(dr["consumoForaPontaTE_Contratado"]);
-                        _Simulacao.DemandaTUSD_Contratado = Convert.ToSingle(dr["demandaTUSD_Contratado"]);
-                        _Simulacao.ConsumoNaPontaTUSD_Faturado = Convert.ToSingle(dr["consumoNaPontaTUSD_Faturado"]);
-                        _Simulacao.ConsumoForaPontaTUSD_Faturado = Convert.ToSingle(dr["consumoForaPontaTUSD_Faturado"]);
-                        _Simulacao.ConsumoNaPontaTE_Faturado = Convert.ToSingle(dr["consumoNaPontaTE_Faturado"]);
-                        _Simulacao.ConsumoForaPontaTE_Faturado = Convert.ToSingle(dr["consumoForaPontaTE_Faturado"]);
-                        _Simulacao.ConsumoUltrapassagemNaPonta_Faturado = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_Faturado"]);
-                        _Simulacao.ConsumoUltrapassagemForaPonta_Faturado = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_Faturado"]);
-                        _Simulacao.ConsumoNaPontaTUSD_TarifaPreco = Convert.ToInt32(dr["consumoNaPontaTUSD_TarifaPreco"]);
-                        _Simulacao.ConsumoForaPontaTUSD_TarifaPreco = Convert.ToSingle(dr["consumoForaPontaTUSD_TarifaPreco"]);
-                        _Simulacao.ConsumoNaPontaTE_TarifaPreco = Convert.ToSingle(dr["consumoNaPontaTE_TarifaPreco"]);
-                        _Simulacao.ConsumoForaPontaTE_TarifaPreco = Convert.ToSingle(dr["consumoForaPontaTE_TarifaPreco"]);
-                        _Simulacao.ConsumoUltrapassagemNaPonta_TarifaPreco = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_TarifaPreco"]);
-                        _Simulacao.ConsumoUltrapassagemForaPonta_TarifaPreco = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_TarifaPreco"]);
-                        _Simulacao.DemandaTUSD_TarifaPreco = Convert.ToSingle(dr["demandaTUSD_TarifaPreco"]);
-                        _Simulacao.ConsumoNaPontaTUSD_Valor = Convert.ToSingle(dr["consumoNaPontaTUSD_Valor"]);
-                        _Simulacao.ConsumoForaPontaTUSD_Valor = Convert.ToSingle(dr["consumoForaPontaTUSD_Valor"]);
-                        _Simulacao.ConsumoNaPontaTE_Valor = Convert.ToSingle(dr["consumoNaPontaTE_Valor"]);
-                        _Simulacao.ConsumoForaPontaTE_Valor = Convert.ToSingle(dr["consumoForaPontaTE_Valor"]);
-                        _Simulacao.ConsumoUltrapassagemNaPonta_Valor = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_Valor"]);
-                        _Simulacao.ConsumoUltrapassagemForaPonta_Valor = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_Valor"]);
-                        _Simulacao.DemandaTUSD_Valor = Convert.ToSingle(dr["demandaTUSD_Valor"]);
-                        _Simulacao.SubTotal = Convert.ToSingle(dr["subTotal"]);
-                        _Simulacao.ValorTotal = Convert.ToSingle(dr["valorTotal"]);
-                        _Simulacao.TipoContratoDestinoID = Convert.ToInt32(dr["id_tipocontrato_destino"]);
-                        listaSaida.Add(_Simulacao);
+                        while (dr.Read())
+                        {
+                            GraficoModel _Simulacao = new GraficoModel();
+                            _Simulacao.DataDaSimulacao = Convert.ToDateTime(dr["data_simulacao"]);
+                            _Simulacao.DataReferencia = Convert.ToDateTime(dr["data_referencia"]);
+                            _Simulacao.TarifaOrigemID = Convert.ToInt32(dr["id_tarifa_origem"]);
+                            _Simulacao.TarifaDestinoID = Convert.ToInt32(dr["id_tarifa_destino"]);
+                            _Simulacao.FabricaID = Convert.ToInt32(dr["id_fabrica"]);
+                            _Simulacao.DistribuidoraID = Convert.ToInt32(dr["id_distribuidora"]);
+                            _Simulacao.TipoContratoID = Convert.ToInt32(dr["id_tipocontrato"]);
+                            _Simulacao.TipoSubGrupoID = Convert.ToInt32(dr["id_tiposubGrupo"]);
+                            _Simulacao.BandeiraID = Convert.ToInt32(dr["id_bandeira"]);
+                            _Simulacao.ConsumoNaPontaTUSD_Registrado = Convert.ToSingle(dr["consumoNaPontaTUSD_Registrado"]);
+                            _Simulacao.ConsumoForaPontaTUSD_Registrado = Convert.ToSingle(dr["consumoForaPontaTUSD_Registrado"]);
+                            _Simulacao.ConsumoNaPontaTE_Registrado = Convert.ToSingle(dr["consumoNaPontaTE_Registrado"]);
+                            _Simulacao.ConsumoForaPontaTE_Registrado = Convert.ToSingle(dr["consumoForaPontaTE_Registrado"]);
+                            _Simulacao.ConsumoUltrapassagemNaPonta_Registrado = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_Registrado"]);
+                            _Simulacao.ConsumoUltrapassagemForaPonta_Registrado = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_Registrado"]);
+                            _Simulacao.DemandaTUSD_Registrado = Convert.ToSingle(dr["demandaTUSD_Registrado"]);
+                            _Simulacao.ConsumoNaPontaTUSD_Contratado = Convert.ToSingle(dr["consumoNaPontaTUSD_Contratado"]);
+                            _Simulacao.ConsumoForaPontaTUSD_Contratado = Convert.ToSingle(dr["consumoForaPontaTUSD_Contratado"]);
+                            _Simulacao.ConsumoNaPontaTE_Contratado = Convert.ToSingle(dr["consumoNaPontaTE_Contratado"]);
+                            _Simulacao.ConsumoForaPontaTE_Contratado = Convert.ToSingle(dr["consumoForaPontaTE_Contratado"]);
+                            _Simulacao.DemandaTUSD_Contratado = Convert.ToSingle(dr["demandaTUSD_Contratado"]);
+                            _Simulacao.ConsumoNaPontaTUSD_Faturado = Convert.ToSingle(dr["consumoNaPontaTUSD_Faturado"]);
+                            _Simulacao.ConsumoForaPontaTUSD_Faturado = Convert.ToSingle(dr["consumoForaPontaTUSD_Faturado"]);
+                            _Simulacao.ConsumoNaPontaTE_Faturado = Convert.ToSingle(dr["consumoNaPontaTE_Faturado"]);
+                            _Simulacao.ConsumoForaPontaTE_Faturado = Convert.ToSingle(dr["consumoForaPontaTE_Faturado"]);
+                            _Simulacao.ConsumoUltrapassagemNaPonta_Faturado = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_Faturado"]);
+                            _Simulacao.ConsumoUltrapassagemForaPonta_Faturado = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_Faturado"]);
+                            _Simulacao.ConsumoNaPontaTUSD_TarifaPreco = Convert.ToInt32(dr["consumoNaPontaTUSD_TarifaPreco"]);
+                            _Simulacao.ConsumoForaPontaTUSD_TarifaPreco = Convert.ToSingle(dr["consumoForaPontaTUSD_TarifaPreco"]);
+                            _Simulacao.ConsumoNaPontaTE_TarifaPreco = Convert.ToSingle(dr["consumoNaPontaTE_TarifaPreco"]);
+                            _Simulacao.ConsumoForaPontaTE_TarifaPreco = Convert.ToSingle(dr["consumoForaPontaTE_TarifaPreco"]);
+                            _Simulacao.ConsumoUltrapassagemNaPonta_TarifaPreco = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_TarifaPreco"]);
+                            _Simulacao.ConsumoUltrapassagemForaPonta_TarifaPreco = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_TarifaPreco"]);
+                            _Simulacao.DemandaTUSD_TarifaPreco = Convert.ToSingle(dr["demandaTUSD_TarifaPreco"]);
+                            _Simulacao.ConsumoNaPontaTUSD_Valor = Convert.ToSingle(dr["consumoNaPontaTUSD_Valor"]);
+                            _Simulacao.ConsumoForaPontaTUSD_Valor = Convert.ToSingle(dr["consumoForaPontaTUSD_Valor"]);
+                            _Simulacao.ConsumoNaPontaTE_Valor = Convert.ToSingle(dr["consumoNaPontaTE_Valor"]);
+                            _Simulacao.ConsumoForaPontaTE_Valor = Convert.ToSingle(dr["consumoForaPontaTE_Valor"]);
+                            _Simulacao.ConsumoUltrapassagemNaPonta_Valor = Convert.ToSingle(dr["consumoUltrapassagemNaPonta_Valor"]);
+                            _Simulacao.ConsumoUltrapassagemForaPonta_Valor = Convert.ToSingle(dr["consumoUltrapassagemForaPonta_Valor"]);
+                            _Simulacao.DemandaTUSD_Valor = Convert.ToSingle(dr["demandaTUSD_Valor"]);
+                            _Simulacao.SubTotal = Convert.ToSingle(dr["subTotal"]);
+                            _Simulacao.ValorTotal = Convert.ToSingle(dr["valorTotal"]);
+                            _Simulacao.TipoContratoDestinoID = Convert.ToInt32(dr["id_tipocontrato_destino"]);
+                            listaSaida.Add(_Simulacao);
+                        }
                     }
                 }
+                catch(Exception ex){}
             }
             return listaSaida;
         }
